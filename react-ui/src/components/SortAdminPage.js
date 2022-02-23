@@ -1,0 +1,140 @@
+import React from "react";
+
+// Import React Bootstrap components
+import Button from "react-bootstrap/Button";
+
+// Function to determine how to display admin page
+export function SortAdminPage(
+  postsArray,
+  selectedUser,
+  idsArray,
+  authorsArray,
+  titlesArray,
+  toggleEditVar,
+  handleDeletePost,
+  dateCreatedArray,
+  dateModifiedArray
+) {
+  let displayPosts = [];
+
+  // Loop through posts and create divs for each post with buttons to delete and edit
+  for (let i = 0; i <= postsArray.length - 1; i++) {
+    // Capitalise author names
+    const name = authorsArray[i];
+    const nameCapitalised = name.charAt(0).toUpperCase() + name.slice(1);
+
+    // If user has not clicked on a particular blog author's name on the left side of the page yet,
+    // show all posts with edit and delete buttons underneath
+    if (selectedUser === null) {
+      displayPosts.push(
+        <div className="post" key={idsArray[i]}>
+          <div className="author">
+            <b>Author:</b> {nameCapitalised}
+          </div>
+          <div className="title">{titlesArray[i]}</div>
+
+          {/* Learned to replace character in string here:
+        https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/ */}
+          <div className="postBody">{postsArray[i].replace("///", "")}</div>
+          <div className="postButtons">
+            <Button
+              className="buttons"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                toggleEditVar(
+                  idsArray[i],
+                  authorsArray[i],
+                  titlesArray[i],
+                  postsArray[i]
+                )
+              }
+            >
+              Edit Post
+            </Button>
+            <Button
+              className="buttons"
+              variant="primary"
+              type="button"
+              onClick={() => handleDeletePost(idsArray[i])}
+            >
+              Delete Post
+            </Button>
+          </div>
+          <div className="bothTimeStamps">
+            <div className="dateCreated">
+              {" "}
+              <b>Date Created:</b> &nbsp;{dateCreatedArray[i]}
+            </div>
+            <div className="dateModified">
+              <b>Date Modified:</b>&nbsp;
+              {dateModifiedArray[i]}
+            </div>
+          </div>
+        </div>
+      );
+
+      // If user has clicked on a particular blog author's name, only display that author's posts
+    } else if (authorsArray[i] === selectedUser) {
+      displayPosts.push(
+        <div className="post" key={idsArray[i]}>
+          <div className="author">
+            <b>Author:</b> {nameCapitalised}
+          </div>
+          <div className="title">{titlesArray[i]}</div>
+
+          {/* Learned to replace character in string here:
+        https://www.geeksforgeeks.org/how-to-remove-a-character-from-string-in-javascript/ */}
+          <div className="postBody">{postsArray[i].replace("///", "")}</div>
+          <div className="postButtons">
+            <Button
+              className="buttons"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                toggleEditVar(
+                  idsArray[i],
+                  authorsArray[i],
+                  titlesArray[i],
+                  postsArray[i]
+                )
+              }
+            >
+              Edit Post
+            </Button>
+            <Button
+              className="buttons"
+              variant="primary"
+              type="button"
+              onClick={() => handleDeletePost(idsArray[i])}
+            >
+              Delete Post
+            </Button>
+          </div>
+          <div className="bothTimeStamps">
+            <div className="dateCreated">
+              {" "}
+              <b>Date Created:</b> &nbsp;{dateCreatedArray[i]}
+            </div>
+            <div className="dateModified">
+              <b>Date Modified:</b>&nbsp;
+              {dateModifiedArray[i]}
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // Display message if there are no posts to display
+  if (displayPosts.length === 0) {
+    displayPosts.push(
+      <div className="redText" key={1}>
+        No posts yet.
+      </div>
+    );
+  }
+
+  // Return array of divs for each post to be used by admin area component
+  return displayPosts;
+}

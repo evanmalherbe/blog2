@@ -1,0 +1,291 @@
+/* Styling for HyperionDev Bootcamp - level 3 task 15 - capstone project - blog */
+/* Misc styles */
+body {
+  font-size: 16px;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+.beachImg,
+.pcImg {
+  width: 16rem;
+  margin-bottom: 1rem;
+  border: 1px solid #6f5f5d;
+}
+
+.menuIcon {
+  width: 15px;
+  margin-right: 5px;
+}
+
+.redText {
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+/* Main container "app" */
+/* Learned how to push footer to bottom of page here: 
+https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #edf0f5;
+  position: relative;
+}
+
+/* Header styles */
+.logo {
+  height: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: #2a6877;
+  color: #f0f1f3;
+  height: 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border-bottom: 1px solid #dedede; */
+  padding-top: 0.5rem;
+  box-shadow: 0px 0px 5px grey;
+}
+
+.logoAndHeading {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Styling for Menu */
+.menuDiv {
+  display: flex;
+  margin-right: 1rem;
+  margin-left: auto;
+}
+
+.menuDiv ul {
+  margin: 0;
+  padding: 0;
+}
+
+.menuDiv li {
+  display: inline;
+  margin: 0rem 0.5rem;
+}
+
+.menuDiv a {
+  text-decoration: none;
+  color: #f0f1f3;
+}
+
+.menuDiv a:hover {
+  text-decoration: underline;
+  color: #f0f1f3;
+}
+
+/* End of styling for menu ------------------------------*/
+
+/* Div for area just under header. Includes breadcrumbs and login status message */
+.underHeader {
+  display: flex;
+  align-items: center;
+}
+
+/* Breadcrumbs just under header */
+.breadCrumbs {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.breadCrumbs p {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+/* End of breadcrumbs -------------------------------- */
+
+/* Div for login status message */
+.loginStatusDiv {
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.loginStatusDiv p {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  margin-right: 1rem;
+}
+
+/* Elements on main part of page */
+.bodyDiv {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 1rem 0rem 3rem 0rem;
+}
+
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+  width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.registerDiv {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+  width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.createPostDiv {
+  display: flex;
+  width: 49rem;
+  flex-direction: column;
+  padding: 0rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.editPostDiv {
+  display: flex;
+  width: 49rem;
+  flex-direction: column;
+  padding: 0rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.adminArea {
+  display: flex;
+  width: 49rem;
+  flex-direction: column;
+  padding: 0rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.leftPanel {
+  display: flex;
+  width: 15rem;
+  flex-direction: column;
+  padding: 1rem;
+  border-right: 1px solid #dedede;
+  border-top: 1px solid #dedede;
+  background-color: #f9fbfa;
+}
+
+.usersList {
+  margin-left: 2rem;
+  padding: 0;
+}
+
+.colour {
+  margin-top: 0.5rem;
+  color: #fff;
+  background: red;
+}
+
+.centerPanel {
+  display: flex;
+  width: 49rem;
+  flex-direction: column;
+  padding: 1rem 0rem 3rem 0rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.rightPanel {
+  display: flex;
+  width: 15rem;
+  flex-direction: column;
+  padding: 1rem;
+  border-left: 1px solid #dedede;
+}
+/* ------------------------------------------ */
+
+/* Blog post styles  */
+.post {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0rem 1rem 0.3rem 1rem;
+  background-color: white;
+}
+
+.author {
+  margin-top: 0.3rem;
+  text-align: right;
+  font-size: 0.7rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.postBody {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.postButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 13rem;
+}
+
+.bothTimeStamps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.dateCreated {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.dateModified {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 0.7rem;
+  text-align: right;
+}
+/* --------------------------------------- */
+
+/* Footer styles */
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 100%;
+  color: #f0f1f3;
+  background-color: #2a6877;
+  box-shadow: 0px 0px 5px grey;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer p {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
