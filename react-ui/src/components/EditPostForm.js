@@ -17,7 +17,7 @@ import LeftPanel from "./LeftPanel";
 import "../App.css";
 
 // Function to display edit post form
-function EditPost(props) {
+function EditPostForm(props) {
   let showEditPostForm;
 
   // Learned to redirect/Navigate with react router here:
@@ -99,4 +99,4 @@ function EditPost(props) {
 }
 
 // Export component to be used in other files
-export default EditPost;
+export default EditPostForm;

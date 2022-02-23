@@ -3,15 +3,15 @@ import React from "react";
 // Import components
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Login from "./components/Login";
+import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
-import Register from "./components/Register";
-import CreatePost from "./components/CreatePost";
+import RegisterForm from "./components/RegisterForm";
+import CreatePostForm from "./components/CreatePostForm";
 import AddPost from "./components/AddPost";
 import DeletePost from "./components/DeletePost";
 import AdminArea from "./components/AdminArea";
 import GetPosts from "./components/GetPosts";
-import EditPost from "./components/EditPost";
+import EditPostForm from "./components/EditPostForm";
 import CreateWelcome from "./components/CreateWelcome";
 import ScrollToTop from "./components/ScrollToTop";
 import ModifyPosts from "./components/ModifyPosts";
@@ -770,7 +770,7 @@ class App extends React.Component {
               <Route
                 path="/Login"
                 element={
-                  <Login
+                  <LoginForm
                     authMessage={authMessage}
                     handleLogin={this.handleLogin}
                     handleUsername={this.handleUsername}
@@ -784,7 +784,7 @@ class App extends React.Component {
               <Route
                 path="/Register"
                 element={
-                  <Register
+                  <RegisterForm
                     handleUsername={this.handleUsername}
                     handlePassword={this.handlePassword}
                     handleRegister={this.handleRegister}
@@ -798,7 +798,7 @@ class App extends React.Component {
               <Route
                 path="/CreatePost"
                 element={
-                  <CreatePost
+                  <CreatePostForm
                     authMessage={authMessage}
                     handleTitle={this.handleTitle}
                     handlePost={this.handlePost}
@@ -859,7 +859,7 @@ class App extends React.Component {
               <Route
                 path="/EditPost"
                 element={
-                  <EditPost
+                  <EditPostForm
                     authMsg={authMessage}
                     id={postId}
                     title={postTitle}

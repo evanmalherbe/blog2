@@ -17,7 +17,7 @@ import LeftPanel from "./LeftPanel";
 import "../App.css";
 
 // Function to display create post page
-function CreatePost(props) {
+function CreatePostForm(props) {
   let showCreatePost;
 
   // Learned to redirect/Navigate with react router here:
@@ -85,4 +85,4 @@ function CreatePost(props) {
 }
 
 // Export component to be used in other files
-export default CreatePost;
+export default CreatePostForm;

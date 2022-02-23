@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
 // Function to display register page
-function Register(props) {
+function RegisterForm(props) {
   let showButton;
 
   // If user has just registered, redirect straight to login page
@@ -67,4 +67,4 @@ function Register(props) {
 }
 
 // Export component to be used in other files
-export default Register;
+export default RegisterForm;

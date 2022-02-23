@@ -14,11 +14,10 @@ import "../App.css";
 
 // Import components
 import GoogleLoginButton from "./GoogleLoginButton";
-//import FacebookLoginButton from "./FacebookLoginButton";
 import FacebookLoginComponent from "./FacebookLoginButton";
 
 // Function to display login page
-function Login(props) {
+function LoginForm(props) {
   let showLoginPage;
 
   // Learned to redirect/Navigate with react router here:
@@ -88,4 +87,4 @@ function Login(props) {
 }
 
 // Export component to be used in other files
-export default Login;
+export default LoginForm;
