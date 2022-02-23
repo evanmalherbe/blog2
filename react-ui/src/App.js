@@ -90,7 +90,7 @@ class App extends React.Component {
     this.reloadForDeletePost = this.reloadForDeletePost.bind(this);
   }
 
-  // This is called by DeletePost component to reload page after deleting a post
+  // This function is called by DeletePost component to reload page after deleting a post
   reloadForDeletePost() {
     this.setState(
       {
@@ -106,7 +106,7 @@ class App extends React.Component {
     );
   }
 
-  // This is called by AddPost component to reload page after adding new post
+  // This function is called by AddPost component to reload page after adding new post
   reloadForAddPost() {
     this.setState(
       {
@@ -262,6 +262,8 @@ class App extends React.Component {
     // Learned how to use window.confirm here:
     // https://stackoverflow.com/questions/63311845/unexpected-use-of-confirm-no-restricted-globals
 
+    // If user confirms they want to delete blog post, this function sets "postToDelete" to true, which
+    // lets the "DeletePost" component load. This deletes the post from the db.
     if (
       window.confirm("Are you sure you want to delete this blog post?") === true
     ) {
@@ -269,47 +271,13 @@ class App extends React.Component {
         postToDelete: true,
         postId: id,
       });
+
+      // if user clicks cancel on confirmation message, goes back to AdminArea page
     } else {
       this.setState({
         postToDelete: false,
       });
     }
-
-    //   // Post request to delete post from db
-    //   fetch("/deletepost", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       id: postId,
-    //     }),
-    //   })
-    //     .then((res) => res.json())
-    //     .then(
-    //       (result) => {
-    //         this.setState(
-    //           {
-    //             isLoaded: false,
-    //           },
-    //           () => {
-    //             console.log(
-    //               "Post request to delete blog post sent. " + result.message
-    //             );
-    //             this.reloadPage();
-    //           }
-    //         );
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           isLoaded: false,
-    //           error,
-    //         });
-    //       }
-    //     );
-
-    //   // End of if statement to confirm if user really wants to delete post
-    // }
 
     // End of handle delete post function
   }
@@ -343,48 +311,8 @@ class App extends React.Component {
 
   // ----------------------------------------------------------- //
 
-  // // Post request to save new post to database
-  // fetchSavePost(finalPost, date) {
-  //   fetch("/addpost", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-
-  //     body: JSON.stringify({
-  //       author: this.state.currentUser,
-  //       title: this.state.postTitle,
-  //       post: finalPost,
-  //       datecreated: date,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         this.setState(
-  //           {
-  //             message: result.message,
-  //             isLoaded: false,
-  //           },
-  //           () => {
-  //             console.log(
-  //               "Blog post info sent via post. Reply is: " + this.state.message
-  //             );
-  //             alert("Your blog post has been saved successfully.");
-  //             this.reloadPage();
-  //           }
-  //         );
-  //       },
-  //       (error) => {
-  //         this.setState({
-  //           error,
-  //         });
-  //       }
-  //     );
-  // }
-
   // Saves new blog post to database, along with date created timestamp
-  handleSavePost(event) {
+  handleSavePost() {
     if (this.state.postTitle !== null || this.state.postBody !== null) {
       // Add "///" to end of post to help separate posts later (commas in post body where making it difficult to separate posts into an array, so this is what I came up with)
       let finalPost = this.state.postBody + "///";
@@ -806,6 +734,8 @@ class App extends React.Component {
           <BrowserRouter>
             {/* Component to automatically scroll to top of new page when user arrives */}
             <ScrollToTop />
+
+            {/* Retrieve blog posts from db */}
             <GetPosts
               isLoaded={this.state.isLoaded}
               loadPosts={this.loadPosts}

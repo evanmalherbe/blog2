@@ -35,14 +35,6 @@ function AdminArea(props) {
   if (showEditPost === true && adminStatus === true) {
     showAdminArea = <Navigate to="/EditPost" />;
 
-    // If user has clicked on the "Delete post" button, call DeletePost component
-  } else if (
-    adminStatus === true &&
-    authMessage === "Success! Token valid." &&
-    postToDelete === true
-  ) {
-    showAdminArea = <Navigate to="/DeletePost" />;
-
     // If user has not clicked to edit or delete a post, add all posts from array to "displayposts" variable,
     // to be displayed on page
   } else {
@@ -80,7 +72,11 @@ function AdminArea(props) {
     // https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
 
     // if user logged in and he is an admin, show admin area
-    if (authMessage === "Success! Token valid." && adminStatus === true) {
+    if (
+      authMessage === "Success! Token valid." &&
+      adminStatus === true &&
+      postToDelete === false
+    ) {
       showAdminArea = (
         <div className="adminArea" id="top">
           <h2>Admin Area</h2>
@@ -91,6 +87,14 @@ function AdminArea(props) {
           <br />
         </div>
       );
+
+      // If user has clicked on the "Delete post" button, call DeletePost component
+    } else if (
+      adminStatus === true &&
+      authMessage === "Success! Token valid." &&
+      postToDelete === true
+    ) {
+      showAdminArea = <Navigate to="/DeletePost" />;
     } else {
       // Else redirect to home page
       showAdminArea = <Navigate to="/" />;
