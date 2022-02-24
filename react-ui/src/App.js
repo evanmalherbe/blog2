@@ -9,6 +9,7 @@ import RegisterForm from "./components/RegisterForm";
 import CreatePostForm from "./components/CreatePostForm";
 import AddPost from "./components/AddPost";
 import DeletePost from "./components/DeletePost";
+import UpdatePost from "./components/UpdatePost";
 import AdminArea from "./components/AdminArea";
 import GetPosts from "./components/GetPosts";
 import EditPostForm from "./components/EditPostForm";
@@ -58,11 +59,13 @@ class App extends React.Component {
       selectedUser: null,
       dateCreatedArray: [],
       dateModifiedArray: [],
+      dateModified: null,
       showEditPost: false,
       justRegistered: false,
       editCanceled: false,
       postToAdd: false,
       postToDelete: false,
+      postToUpdate: false,
     };
 
     // Binding to make "this" work correctly
@@ -81,13 +84,27 @@ class App extends React.Component {
     this.handleDeletePost = this.handleDeletePost.bind(this);
     this.updateSelectedUser = this.updateSelectedUser.bind(this);
     this.fetchRegister = this.fetchRegister.bind(this);
-    //this.fetchSavePost = this.fetchSavePost.bind(this);
     this.toggleEditVar = this.toggleEditVar.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
     this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
     this.handleCancelEdit = this.handleCancelEdit.bind(this);
     this.reloadForAddPost = this.reloadForAddPost.bind(this);
     this.reloadForDeletePost = this.reloadForDeletePost.bind(this);
+    this.reloadForUpdatePost = this.reloadForUpdatePost.bind(this);
+  }
+
+  // This function is called by UpdatePost component to reload page after updating a post
+  reloadForUpdatePost() {
+    this.setState(
+      {
+        isLoaded: false,
+        postToUpdate: false,
+        showEditPost: false,
+      },
+      () => {
+        this.reloadPage();
+      }
+    );
   }
 
   // This function is called by DeletePost component to reload page after deleting a post
@@ -96,11 +113,8 @@ class App extends React.Component {
       {
         isLoaded: false,
         postToDelete: false,
-        authMessage: "Success! Token valid.",
-        adminStatus: true,
       },
       () => {
-        alert("The blog post has been removed.");
         this.reloadPage();
       }
     );
@@ -112,7 +126,6 @@ class App extends React.Component {
       {
         isLoaded: false,
         postToAdd: false,
-        authMessage: "Success! Token valid.",
       },
       () => {
         alert("Your blog post has been saved successfully.");
@@ -131,7 +144,6 @@ class App extends React.Component {
         postAuthor: null,
         postTitle: null,
         postBody: null,
-        authMessage: "Success! Token valid.",
       },
       () => {}
     );
@@ -203,56 +215,72 @@ class App extends React.Component {
 
   // Runs when user has edited/updated their blog post on the Admin area page and hits the Update button
   // Saves updated title and post to database
-  handleEditPost(postId) {
-    // Add "///" to end of post to help separate posts later (commas in post body where making it difficult to separate posts into an array, so this is what I came up with)
-    let finalPost = this.state.postBody + "///";
+  handleEditPost(id) {
+    // Add "///" to end of post to help separate posts later (commas in post body where making it difficult
+    // to separate posts into an array, so this is what I came up with)
+    let cleanedPost = this.state.postBody.replace("///", "");
+    let finalPost = cleanedPost + "///";
 
     // Learned how to add a time stamp here:
     // https://stackoverflow.com/questions/9756120/how-do-i-get-a-utc-timestamp-in-javascript
 
-    let dateModified = new Date().toString();
+    let dateMod = new Date().toString();
 
     // Learned how to remove words from a string here:
     // https://stackoverflow.com/questions/10398931/how-to-remove-text-from-a-string
 
-    dateModified = dateModified.replace(" (South Africa Standard Time)", "");
+    dateMod = dateMod.replace(" (South Africa Standard Time)", "");
+
+    this.setState(
+      {
+        postToUpdate: true,
+        postId: id,
+        postBody: finalPost,
+        dateModified: dateMod,
+      },
+      () =>
+        console.log(
+          "Handle edit post has run and post to update is" +
+            this.state.postToUpdate
+        )
+    );
 
     // post request to update post on database
-    fetch("/updatepost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: postId,
-        title: this.state.postTitle,
-        post: finalPost,
-        dateMod: dateModified,
-      }),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState(
-            {
-              isLoaded: false,
-              showEditPost: false,
-            },
-            () => {
-              console.log(
-                "Post request to update blog post sent. " + result.message
-              );
-              this.reloadPage();
-            }
-          );
-        },
-        (error) => {
-          this.setState({
-            isLoaded: false,
-            error,
-          });
-        }
-      );
+    // fetch("/updatepost", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     id: postId,
+    //     title: this.state.postTitle,
+    //     post: finalPost,
+    //     dateMod: dateModified,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then(
+    //     (result) => {
+    //       this.setState(
+    //         {
+    //           isLoaded: false,
+    //           showEditPost: false,
+    //         },
+    //         () => {
+    //           console.log(
+    //             "Post request to update blog post sent. " + result.message
+    //           );
+    //           this.reloadPage();
+    //         }
+    //       );
+    //     },
+    //     (error) => {
+    //       this.setState({
+    //         isLoaded: false,
+    //         error,
+    //       });
+    //     }
+    //   );
 
     // End of handle edit post function
   }
@@ -315,7 +343,8 @@ class App extends React.Component {
   handleSavePost() {
     if (this.state.postTitle !== null || this.state.postBody !== null) {
       // Add "///" to end of post to help separate posts later (commas in post body where making it difficult to separate posts into an array, so this is what I came up with)
-      let finalPost = this.state.postBody + "///";
+      let cleanedPost = this.state.postBody.replace("///", "");
+      let finalPost = cleanedPost + "///";
 
       // Learned how to add a time stamp here:
       // https://stackoverflow.com/questions/9756120/how-do-i-get-a-utc-timestamp-in-javascript
@@ -699,6 +728,7 @@ class App extends React.Component {
       authorArray,
       dateCreatedArray,
       dateModifiedArray,
+      dateModified,
       adminStatus,
       authMessage,
       postId,
@@ -712,6 +742,7 @@ class App extends React.Component {
       editCanceled,
       postToAdd,
       postToDelete,
+      postToUpdate,
     } = this.state;
 
     let loginStatusMsg;
@@ -871,6 +902,21 @@ class App extends React.Component {
                     handleCancelEdit={this.handleCancelEdit}
                     showEditPost={showEditPost}
                     editCanceled={editCanceled}
+                    postToUpdate={postToUpdate}
+                  />
+                }
+              />
+
+              <Route
+                path="/UpdatePost"
+                element={
+                  <UpdatePost
+                    postToUpdate={postToUpdate}
+                    postId={postId}
+                    postTitle={postTitle}
+                    postBody={postBody}
+                    dateModified={dateModified}
+                    reloadForUpdatePost={this.reloadForUpdatePost}
                   />
                 }
               />
@@ -897,6 +943,7 @@ class App extends React.Component {
                     toggleEditVar={this.toggleEditVar}
                     showEditPost={showEditPost}
                     postToDelete={postToDelete}
+                    postToUpdate={postToUpdate}
                   />
                 }
               />

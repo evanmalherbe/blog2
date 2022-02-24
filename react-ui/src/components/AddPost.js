@@ -2,7 +2,7 @@ import React from "react";
 
 import { Navigate } from "react-router-dom";
 
-// Create GetPosts class component
+// Create Add post class component
 class AddPost extends React.Component {
   constructor(props) {
     super(props);

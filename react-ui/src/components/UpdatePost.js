@@ -2,8 +2,8 @@ import React from "react";
 
 import { Navigate } from "react-router-dom";
 
-// Create DeletePost class component
-class DeletePost extends React.Component {
+// Create UpdateePost class component
+class UpdatePost extends React.Component {
   constructor(props) {
     super(props);
     // Set initial state variables.
@@ -13,14 +13,18 @@ class DeletePost extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.postToDelete === true) {
-      fetch("/deletepost", {
+    if (this.props.postToUpdate === true) {
+      console.log("Reached update post component");
+      fetch("/updatepost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           id: this.props.postId,
+          title: this.props.postTitle,
+          post: this.props.postBody,
+          dateMod: this.props.dateModified,
         }),
       })
         .then((res) => res.json())
@@ -32,10 +36,10 @@ class DeletePost extends React.Component {
               },
               () => {
                 console.log(
-                  "Post request to delete blog post sent. " + result.message
+                  "Post request to update blog post sent. " + result.message
                 );
-                alert("The blog post has been removed.");
-                this.props.reloadForDeletePost();
+                alert("The blog post has been updated.");
+                this.props.reloadForUpdatePost();
               }
             );
           },
@@ -47,19 +51,19 @@ class DeletePost extends React.Component {
           }
         );
 
-      // End of if statement to check if delete button has been clicked
+      // End of if statement to check if Update button has been clicked
     }
 
     // End of componentdidmount
   }
 
   render() {
-    let showDeletePost = null;
-    if (this.props.postToDelete === false) {
-      showDeletePost = <Navigate to="/AdminArea" />;
+    let showUpdatePost = null;
+    if (this.props.postToUpdate === false) {
+      showUpdatePost = <Navigate to="/AdminArea" />;
     }
-    return showDeletePost;
+    return showUpdatePost;
   }
 }
 
-export default DeletePost;
+export default UpdatePost;
