@@ -84,7 +84,11 @@ function EditPostForm(props) {
       );
       // Go back to admin area if user clicked the button to "cancel" the edit
     } else if (props.showEditPost === false || props.editCanceled === true) {
-      showEditPostForm = <Navigate to="/AdminArea" />;
+      if (props.adminStatus === true) {
+        showEditPostForm = <Navigate to="/AdminArea" />;
+      } else {
+        showEditPostForm = <Navigate to="/ModifyPosts" />;
+      }
 
       // Redirect home if user is not logged in and hasn't clicked the edit post button
     } else if (props.authMsg !== "Success! Token valid.") {

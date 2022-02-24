@@ -892,6 +892,7 @@ class App extends React.Component {
                 element={
                   <EditPostForm
                     authMsg={authMessage}
+                    adminStatus={adminStatus}
                     id={postId}
                     title={postTitle}
                     post={postBody}
