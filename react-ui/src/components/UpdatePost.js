@@ -30,18 +30,18 @@ class UpdatePost extends React.Component {
         .then((res) => res.json())
         .then(
           (result) => {
-            this.setState(
-              {
-                isLoaded: false,
-              },
-              () => {
-                console.log(
-                  "Post request to update blog post sent. " + result.message
-                );
-                alert("The blog post has been updated.");
-                this.props.reloadForUpdatePost();
-              }
+            // this.setState(
+            //   {
+            //     isLoaded: false,
+            //   },
+            //   () => {
+            console.log(
+              "Post request to update blog post sent. " + result.message
             );
+            alert("The blog post has been updated.");
+            this.props.reloadForUpdatePost();
+            // }
+            // );
           },
           (error) => {
             this.setState({
@@ -59,9 +59,18 @@ class UpdatePost extends React.Component {
 
   render() {
     let showUpdatePost = null;
-    if (this.props.postToUpdate === false) {
+
+    if (this.props.postToUpdate === false && this.props.adminStatus === true) {
+      console.log("1");
       showUpdatePost = <Navigate to="/AdminArea" />;
+    } else if (
+      this.props.postToUpdate === false &&
+      this.props.adminStatus === false
+    ) {
+      console.log("2");
+      showUpdatePost = <Navigate to="/ModifyPosts" />;
     }
+
     return showUpdatePost;
   }
 }

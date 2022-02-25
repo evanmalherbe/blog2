@@ -57,8 +57,13 @@ class AddPost extends React.Component {
   // Nothing to return
   render() {
     let showAddPost = null;
-    if (this.props.postToAdd === false) {
+    if (this.props.postToAdd === false && this.props.adminStatus === true) {
       showAddPost = <Navigate to="/AdminArea" />;
+    } else if (
+      this.props.postToAdd === false &&
+      this.props.adminStatus === false
+    ) {
+      showAddPost = <Navigate to="/ModifyPosts" />;
     }
     return showAddPost;
   }

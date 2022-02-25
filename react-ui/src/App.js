@@ -240,47 +240,10 @@ class App extends React.Component {
       },
       () =>
         console.log(
-          "Handle edit post has run and post to update is" +
+          "Handle edit post has run and post to update is: " +
             this.state.postToUpdate
         )
     );
-
-    // post request to update post on database
-    // fetch("/updatepost", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     id: postId,
-    //     title: this.state.postTitle,
-    //     post: finalPost,
-    //     dateMod: dateModified,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then(
-    //     (result) => {
-    //       this.setState(
-    //         {
-    //           isLoaded: false,
-    //           showEditPost: false,
-    //         },
-    //         () => {
-    //           console.log(
-    //             "Post request to update blog post sent. " + result.message
-    //           );
-    //           this.reloadPage();
-    //         }
-    //       );
-    //     },
-    //     (error) => {
-    //       this.setState({
-    //         isLoaded: false,
-    //         error,
-    //       });
-    //     }
-    //   );
 
     // End of handle edit post function
   }
@@ -844,6 +807,7 @@ class App extends React.Component {
                 path="/AddPost"
                 element={
                   <AddPost
+                    adminStatus={adminStatus}
                     author={this.state.currentUser}
                     title={this.state.postTitle}
                     post={postBody}
@@ -858,6 +822,7 @@ class App extends React.Component {
                 path="/DeletePost"
                 element={
                   <DeletePost
+                    adminStatus={adminStatus}
                     postId={postId}
                     postToDelete={postToDelete}
                     reloadForDeletePost={this.reloadForDeletePost}
@@ -883,6 +848,7 @@ class App extends React.Component {
                     handleDeletePost={this.handleDeletePost}
                     toggleEditVar={this.toggleEditVar}
                     showEditPost={showEditPost}
+                    postToDelete={postToDelete}
                   />
                 }
               />
@@ -912,6 +878,7 @@ class App extends React.Component {
                 path="/UpdatePost"
                 element={
                   <UpdatePost
+                    adminStatus={adminStatus}
                     postToUpdate={postToUpdate}
                     postId={postId}
                     postTitle={postTitle}

@@ -55,8 +55,13 @@ class DeletePost extends React.Component {
 
   render() {
     let showDeletePost = null;
-    if (this.props.postToDelete === false) {
+    if (this.props.postToDelete === false && this.props.adminStatus === true) {
       showDeletePost = <Navigate to="/AdminArea" />;
+    } else if (
+      this.props.postToDelete === false &&
+      this.props.adminStatus === false
+    ) {
+      showDeletePost = <Navigate to="/ModifyPosts" />;
     }
     return showDeletePost;
   }

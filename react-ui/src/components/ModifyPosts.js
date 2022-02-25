@@ -24,6 +24,7 @@ function ModifyPosts(props) {
   let displayPosts = [];
   let toggleEditVar = props.toggleEditVar;
   let showEditPost = props.showEditPost;
+  let postToDelete = props.postToDelete;
 
   // Create variable to display admin area or not depending on whether user is logged in
   let showModifyArea;
@@ -31,6 +32,8 @@ function ModifyPosts(props) {
   // Redirect to edit post page if user has clicked the edit post button
   if (showEditPost === true) {
     showModifyArea = <Navigate to="/EditPost" />;
+  } else if (postToDelete === true) {
+    showModifyArea = <Navigate to="/DeletePost" />;
 
     // If user has not clicked edit post button yet...
   } else {
