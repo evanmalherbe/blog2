@@ -9,12 +9,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Import custom stylesheet
 import "../App.css";
 
+// Import image
+import image from "../createImg.jpg";
+
 // Function to display left panel of page. Shows buttons for each blog author, so user can select to
 // only see a particular author's posts, or all author's posts
 function LeftPanel(props) {
   let displayUsers = [];
   let users = props.usersArray;
   let createPostActive = props.createPostActive;
+  let authorHeading = <h4>Authors</h4>;
+  let showEditPost = props.showEditPost;
+  let modifyPostsPageActive = props.modifyPostsPageActive;
 
   // Populate array with button if users array has items in it
   if (users !== undefined && users.length > 0) {
@@ -63,18 +69,21 @@ function LeftPanel(props) {
   }
 
   // If the logged in user is on the "Create post" page, just display "n/a"
-  if (createPostActive === true) {
+  if (
+    createPostActive === true ||
+    showEditPost === true ||
+    modifyPostsPageActive === true
+  ) {
+    authorHeading = "";
     displayUsers = (
-      <div className="redText" key={1}>
-        N/A
-      </div>
+      <img src={image} alt="Laptop keyboard" className="createImg" />
     );
   }
 
   // Return / display left panel
   return (
     <div className="leftPanel">
-      <h4>Authors</h4>
+      {authorHeading}
       {displayUsers}
     </div>
   );

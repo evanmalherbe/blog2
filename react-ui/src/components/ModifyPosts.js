@@ -25,6 +25,7 @@ function ModifyPosts(props) {
   let toggleEditVar = props.toggleEditVar;
   let showEditPost = props.showEditPost;
   let postToDelete = props.postToDelete;
+  let modifyPostsPageActive = true;
 
   // Create variable to display admin area or not depending on whether user is logged in
   let showModifyArea;
@@ -71,6 +72,7 @@ function ModifyPosts(props) {
 
     // if user logged in, show page to modify posts (edit or delete)
     if (props.authMessage === "Success! Token valid.") {
+      console.log("Modify posts page.");
       showModifyArea = (
         <div className="adminArea" id="top">
           <h2>Modify Posts</h2>
@@ -96,6 +98,7 @@ function ModifyPosts(props) {
       <LeftPanel
         usersArray={props.usersArray}
         updateSelectedUser={props.updateSelectedUser}
+        modifyPostsPageActive={modifyPostsPageActive}
       />
       {showModifyArea}
 

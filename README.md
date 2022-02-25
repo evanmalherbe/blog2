@@ -1,10 +1,10 @@
-# HyperionDev Full Stack Web Development Bootcamp - Level 3 - Task 15 - Final Capstone project - Blog
+# Improved Blogging Platform
 
 ## Description
 
-This app is a simple blog that has a React front end and Express backend. It uses a MongoDb database to store the blog posts and allows the user to log in with 3 different methods (username and password, Facebook or Google). It also has an admin area that an admin can use to delete other users posts or edit them.
+This app is an improved version of the simple blog that I created for one of the final projects of the HyperionDev Full Stack Web Development Bootcamp (completed Feb 2022).
 
-The app has been deployed with Heroku and can be accessed at this URL: [https://hyperionblog.herokuapp.com/](https://hyperionblog.herokuapp.com/).
+It has a React front end and Express backend. It uses a MongoDb database to store the blog posts and allows the user to log in with 3 different methods (username and password, Facebook or Google). It also has an admin area that an admin can use to delete other users posts or edit them.
 
 ## Table of Contents
 

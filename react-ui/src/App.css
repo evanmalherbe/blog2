@@ -7,7 +7,13 @@ body {
 
 .beachImg,
 .pcImg {
-  width: 16rem;
+  width: 98%;
+  margin-bottom: 1rem;
+  border: 1px solid #6f5f5d;
+}
+
+.createImg {
+  width: 98%;
   margin-bottom: 1rem;
   border: 1px solid #6f5f5d;
 }
@@ -145,7 +151,6 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 .registerDiv {
   display: flex;
   flex-direction: column;
-
   padding: 1rem;
   width: 25rem;
   margin-left: auto;
@@ -154,7 +159,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .createPostDiv {
   display: flex;
-  width: 49rem;
+  flex: 2;
   flex-direction: column;
   padding: 0rem 1rem;
   margin: 0rem 1rem 0rem 1rem;
@@ -162,7 +167,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .editPostDiv {
   display: flex;
-  width: 49rem;
+  flex: 2;
   flex-direction: column;
   padding: 0rem 1rem;
   margin: 0rem 1rem 0rem 1rem;
@@ -170,7 +175,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .adminArea {
   display: flex;
-  width: 49rem;
+  flex: 2;
   flex-direction: column;
   padding: 0rem 1rem;
   margin: 0rem 1rem 0rem 1rem;
@@ -178,12 +183,16 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .leftPanel {
   display: flex;
-  width: 15rem;
+  flex: 1;
   flex-direction: column;
   padding: 1rem;
   border-right: 1px solid #dedede;
-  border-top: 1px solid #dedede;
-  background-color: #f9fbfa;
+}
+
+.leftPanel h4 {
+  text-align: center;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 1rem;
 }
 
 .usersList {
@@ -199,15 +208,15 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .centerPanel {
   display: flex;
-  width: 49rem;
+  flex: 2;
   flex-direction: column;
-  padding: 1rem 0rem 3rem 0rem;
+  padding: 0rem 1rem;
   margin: 0rem 1rem 0rem 1rem;
 }
 
 .rightPanel {
   display: flex;
-  width: 15rem;
+  flex: 1;
   flex-direction: column;
   padding: 1rem;
   border-left: 1px solid #dedede;

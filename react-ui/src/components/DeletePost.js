@@ -32,7 +32,8 @@ class DeletePost extends React.Component {
               },
               () => {
                 console.log(
-                  "Post request to delete blog post sent. " + result.message
+                  "Delete post page says: Post request to delete blog post sent. " +
+                    result.message
                 );
                 alert("The blog post has been removed.");
                 this.props.reloadForDeletePost();

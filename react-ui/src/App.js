@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
 import RegisterForm from "./components/RegisterForm";
+import RegisterUser from "./components/RegisterUser";
 import CreatePostForm from "./components/CreatePostForm";
 import AddPost from "./components/AddPost";
 import DeletePost from "./components/DeletePost";
@@ -62,10 +63,13 @@ class App extends React.Component {
       dateModified: null,
       showEditPost: false,
       justRegistered: false,
+      userToRegister: false,
       editCanceled: false,
       postToAdd: false,
       postToDelete: false,
       postToUpdate: false,
+      loggedInWithGoogle: false,
+      loggedInWithFacebook: false,
     };
 
     // Binding to make "this" work correctly
@@ -83,7 +87,6 @@ class App extends React.Component {
     this.handleEditPost = this.handleEditPost.bind(this);
     this.handleDeletePost = this.handleDeletePost.bind(this);
     this.updateSelectedUser = this.updateSelectedUser.bind(this);
-    this.fetchRegister = this.fetchRegister.bind(this);
     this.toggleEditVar = this.toggleEditVar.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
     this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
@@ -91,6 +94,22 @@ class App extends React.Component {
     this.reloadForAddPost = this.reloadForAddPost.bind(this);
     this.reloadForDeletePost = this.reloadForDeletePost.bind(this);
     this.reloadForUpdatePost = this.reloadForUpdatePost.bind(this);
+    this.reloadForRegisterUser = this.reloadForRegisterUser.bind(this);
+  }
+
+  // This function is called by RegisterUSer component to reload page after adding user to db
+  reloadForRegisterUser() {
+    this.setState(
+      {
+        isLoaded: false,
+        userToRegister: false,
+        justRegistered: true,
+      },
+      () => {
+        console.log("Reload for register user has run.");
+        this.reloadPage();
+      }
+    );
   }
 
   // This function is called by UpdatePost component to reload page after updating a post
@@ -102,6 +121,7 @@ class App extends React.Component {
         showEditPost: false,
       },
       () => {
+        console.log("Reload for update post has run.");
         this.reloadPage();
       }
     );
@@ -115,6 +135,7 @@ class App extends React.Component {
         postToDelete: false,
       },
       () => {
+        console.log("Reload for delete post has run.");
         this.reloadPage();
       }
     );
@@ -128,6 +149,7 @@ class App extends React.Component {
         postToAdd: false,
       },
       () => {
+        console.log("Reload for add post has run.");
         alert("Your blog post has been saved successfully.");
         this.reloadPage();
       }
@@ -136,17 +158,14 @@ class App extends React.Component {
 
   // Runs when user clicks the cancel button on the edit post page. Returns to Admin area.
   handleCancelEdit() {
-    this.setState(
-      {
-        showEditPost: false,
-        editCanceled: true,
-        postId: null,
-        postAuthor: null,
-        postTitle: null,
-        postBody: null,
-      },
-      () => {}
-    );
+    this.setState({
+      showEditPost: false,
+      editCanceled: true,
+      postId: null,
+      postAuthor: null,
+      postTitle: null,
+      postBody: null,
+    });
   }
 
   // Handles logging in with Facebook account when user clicks button on login page
@@ -159,9 +178,10 @@ class App extends React.Component {
         loggedIn: loginStatus,
         authMessage: "Success! Token valid.",
         adminStatus: false,
+        loggedInWithFacebook: true,
       },
       () => {
-        console.log("Login status is: " + this.state.loggedIn);
+        console.log("Facebook login status is: " + this.state.loggedIn);
         this.handleRegister();
       }
     );
@@ -177,6 +197,7 @@ class App extends React.Component {
         loggedIn: loginStatus,
         authMessage: "Success! Token valid.",
         adminStatus: false,
+        loggedInWithGoogle: true,
       },
       () => {
         console.log("Google Login status is: " + this.state.loggedIn);
@@ -209,7 +230,7 @@ class App extends React.Component {
   /* Runs when user clicks on a particular blog author's name in the left panel to display only that author's posts */
   updateSelectedUser(user) {
     this.setState({ selectedUser: user }, () =>
-      console.log("selected user is now: " + this.state.selectedUser)
+      console.log("Selected user is now: " + this.state.selectedUser)
     );
   }
 
@@ -240,7 +261,7 @@ class App extends React.Component {
       },
       () =>
         console.log(
-          "Handle edit post has run and post to update is: " +
+          "Handle edit post has run and post to update variable is: " +
             this.state.postToUpdate
         )
     );
@@ -295,7 +316,7 @@ class App extends React.Component {
         postBody: post,
       },
       () => {
-        console.log("Post body saved to state");
+        console.log("Post body saved to state.");
       }
     );
   }
@@ -343,11 +364,9 @@ class App extends React.Component {
   }
 
   // Take user login details and create JWT token, then call "handleAuth" function to authenticate user
-  handleLogin(event) {
+  handleLogin() {
     // Run if username and password fields are not blank in form
     if (this.state.username !== null && this.state.password !== null) {
-      console.log("Got to handle login. Username is: " + this.state.username);
-
       fetch("/login", {
         method: "POST",
         headers: {
@@ -371,7 +390,8 @@ class App extends React.Component {
               },
               () => {
                 console.log(
-                  "Login details sent via post. Token is " + this.state.token
+                  "Handle login has run. Login details sent via post. Token is " +
+                    this.state.token
                 );
 
                 // Call handle auth function to authenticate user
@@ -431,7 +451,7 @@ class App extends React.Component {
               },
               () => {
                 console.log(
-                  "handleAuth has run. Welcome, " +
+                  "HandleAuth function has run. Welcome, " +
                     this.state.currentUser +
                     "! Admin status is: " +
                     this.state.adminStatus +
@@ -464,7 +484,7 @@ class App extends React.Component {
   }
 
   // Sets variables to default null state when user clicks the logout button
-  handleLogout(event) {
+  handleLogout() {
     this.setState(
       {
         loggedIn: false,
@@ -480,52 +500,17 @@ class App extends React.Component {
         showGoogleRegButton: false,
         showGoogleLogin: false,
         justRegistered: false,
+        loggedInWithGoogle: false,
+        loggedInWithFacebook: false,
+        userToRegister: false,
+        postToUpdate: false,
+        postToAdd: false,
+        postToDelete: false,
       },
       () => {
-        console.log("User logged out.");
+        console.log("User has been logged out.");
       }
     );
-  }
-
-  // Function for post request to register new user (i.e. create user on db)
-  fetchRegister() {
-    fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password,
-        admin: false,
-      }),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState(
-            {
-              isLoaded: false,
-              justRegistered: true,
-            },
-            () => {
-              console.log("Registration details sent via post.");
-              alert(
-                "New user, " +
-                  this.state.username +
-                  ", registered. Please log in."
-              );
-              this.reloadPage();
-            }
-          );
-        },
-        (error) => {
-          this.setState({
-            error,
-          });
-        }
-      );
   }
 
   /* Register new user. Saves their login details to db and lets them create their own blog posts */
@@ -548,11 +533,64 @@ class App extends React.Component {
           match = true;
         }
       }
-      console.log("Match is: " + match);
+      console.log("Matching user in database? " + match);
 
-      // If user does not yet exist on db, register them. If they exist, do nothing.
+      // If user does not yet exist on db, register them.
       if (match === false) {
-        this.fetchRegister();
+        this.setState(
+          {
+            isLoaded: false,
+            userToRegister: true,
+          },
+          () => {
+            console.log("handle register - 'user to register' set to true");
+            this.reloadPage();
+          }
+        );
+
+        // If user is already registered in db with Google, just log in
+      } else if (match === true && this.state.loggedInWithGoogle === true) {
+        this.setState(
+          {
+            isLoaded: false,
+            userToRegister: false,
+          },
+          () => {
+            console.log("User already has login saved in db (Google).");
+            this.reloadPage();
+          }
+        );
+
+        // If user is already registered in db with Facebook, just log in
+      } else if (match === true && this.state.loggedInWithFacebook === true) {
+        this.setState(
+          {
+            isLoaded: false,
+            userToRegister: false,
+          },
+          () => {
+            console.log("User already has login saved in db (Facebook).");
+            this.reloadPage();
+          }
+        );
+
+        // if username already exists, create alert message
+      } else {
+        this.setState(
+          {
+            isLoaded: false,
+            userToRegister: false,
+            loggedIn: false,
+            authMessage: null,
+          },
+          () => {
+            console.log("User already exists.");
+            alert(
+              "A user with that name already exists. Please choose a different username and then click 'Register' again."
+            );
+            this.reloadPage();
+          }
+        );
       }
     } else {
       // Runs if user submits form with blank username or password field
@@ -579,14 +617,9 @@ class App extends React.Component {
   handleUsername(event) {
     let value = event.target.value;
     let user = value.trim();
-    this.setState(
-      {
-        username: user,
-      },
-      () => {
-        console.log("Username saved: " + this.state.username);
-      }
-    );
+    this.setState({
+      username: user,
+    });
   }
 
   handlePassword(event) {
@@ -626,7 +659,6 @@ class App extends React.Component {
   reloadPage() {
     if (this.state.isLoaded === false) {
       this.getLogins();
-      // this.getPosts();
       console.log("Reload page has run.");
 
       // End of if statement to check if data has been loaded yet.
@@ -667,7 +699,6 @@ class App extends React.Component {
   componentDidMount() {
     if (this.state.isLoaded === false) {
       this.getLogins();
-      //this.getPosts();
 
       console.log("componentDidMount has run.");
       // End of if statement to check if data has been loaded yet.
@@ -706,6 +737,11 @@ class App extends React.Component {
       postToAdd,
       postToDelete,
       postToUpdate,
+      userToRegister,
+      username,
+      password,
+      loggedInWithGoogle,
+      loggedInWithFacebook,
     } = this.state;
 
     let loginStatusMsg;
@@ -765,6 +801,7 @@ class App extends React.Component {
                 path="/Login"
                 element={
                   <LoginForm
+                    userToRegister={userToRegister}
                     authMessage={authMessage}
                     handleLogin={this.handleLogin}
                     handleUsername={this.handleUsername}
@@ -785,6 +822,22 @@ class App extends React.Component {
                     handleGoogleRegister={this.handleGoogleRegister}
                     handleFacebookRegister={this.handleFacebookRegister}
                     justRegistered={justRegistered}
+                    userToRegister={userToRegister}
+                  />
+                }
+              />
+
+              <Route
+                path="/RegisterUser"
+                element={
+                  <RegisterUser
+                    userToRegister={userToRegister}
+                    justRegistered={justRegistered}
+                    username={username}
+                    password={password}
+                    reloadForRegisterUser={this.reloadForRegisterUser}
+                    loggedInWithGoogle={loggedInWithGoogle}
+                    loggedInWithFacebook={loggedInWithFacebook}
                   />
                 }
               />
@@ -799,6 +852,7 @@ class App extends React.Component {
                     handleSavePost={this.handleSavePost}
                     createPostActive={true}
                     postToAdd={postToAdd}
+                    userToRegister={userToRegister}
                   />
                 }
               />
@@ -812,7 +866,7 @@ class App extends React.Component {
                     title={this.state.postTitle}
                     post={postBody}
                     datecreated={dateCreated}
-                    reload={this.reloadForAddPost}
+                    reloadForAddPost={this.reloadForAddPost}
                     postToAdd={postToAdd}
                   />
                 }

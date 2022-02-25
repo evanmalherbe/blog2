@@ -77,6 +77,7 @@ function AdminArea(props) {
 
     // if user logged in and he is an admin, show admin area
     if (authMessage === "Success! Token valid." && adminStatus === true) {
+      console.log("Admin area page.");
       showAdminArea = (
         <div className="adminArea" id="top">
           <h2>Admin Area</h2>

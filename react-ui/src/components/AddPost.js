@@ -15,6 +15,7 @@ class AddPost extends React.Component {
   // Component did mount function runs once only
   componentDidMount() {
     if (this.props.postToAdd === true) {
+      console.log("Add post page.");
       // Add post to db
       fetch("/addpost", {
         method: "POST",
@@ -38,7 +39,7 @@ class AddPost extends React.Component {
               },
               () => {
                 console.log("Blog post saved. Reply is: " + this.state.message);
-                this.props.reload();
+                this.props.reloadForAddPost();
               }
             );
           },

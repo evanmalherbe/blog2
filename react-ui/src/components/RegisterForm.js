@@ -16,12 +16,17 @@ import "../App.css";
 function RegisterForm(props) {
   let showButton;
 
-  // If user has just registered, redirect straight to login page
+  // // If user has just registered, redirect straight to login page
   if (props.justRegistered === true) {
     showButton = <Navigate to="/Login" />;
 
+    // If user just clicked the register button, go to "RegisterUser" component
+  } else if (props.userToRegister === true) {
+    showButton = <Navigate to="/RegisterUser" />;
+
     // If user has not yet registered, display register page/form
   } else {
+    console.log("Register form page.");
     showButton = (
       <div className="registerDiv">
         <h1>Register</h1>

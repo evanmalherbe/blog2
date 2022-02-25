@@ -38,7 +38,7 @@ class GetPosts extends React.Component {
               message: result.message,
             },
             () => {
-              console.log("Db says: " + this.state.message);
+              console.log("Get posts has run. Db says: " + this.state.message);
 
               // Send post info to function in app.js (lifting state up)
               this.props.loadPosts(

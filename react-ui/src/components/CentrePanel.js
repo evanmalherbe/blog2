@@ -39,6 +39,7 @@ function CentrePanel(props) {
     whosePosts = `${nameCapitalised}'s posts`;
   }
 
+  console.log("Centre panel page");
   // Return/display page
   return (
     <div className="centerPanel" id="top">

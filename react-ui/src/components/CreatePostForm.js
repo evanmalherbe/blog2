@@ -23,11 +23,15 @@ function CreatePostForm(props) {
   // Learned to redirect/Navigate with react router here:
   // https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
 
-  // If statement to only show create post page if user has been authenticated, else go back to home page
-  if (
+  if (props.userToRegister === true) {
+    showCreatePost = <Navigate to="/RegisterUser" />;
+
+    // If statement to only show create post page if user has been authenticated, else go back to home page
+  } else if (
     props.authMessage === "Success! Token valid." &&
     props.postToAdd === false
   ) {
+    console.log("Create post form page");
     showCreatePost = (
       <div className="createPostDiv">
         <h1>Create New Post</h1>

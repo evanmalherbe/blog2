@@ -14,7 +14,7 @@ function GoogleLoginButton(props) {
 
   // Run this on successful google login
   const onSuccess = (res) => {
-    console.log("Login Success: currentUser:", res.profileObj.name);
+    console.log("Google login success: currentUser:", res.profileObj.name);
 
     refreshTokenSetup(res);
     // Send google username and id to app.js to be used to log user in
@@ -23,7 +23,8 @@ function GoogleLoginButton(props) {
 
   // Console log message on failure to log in
   const onFailure = (res) => {
-    console.log("Login failed: res:", res);
+    console.log("Google login failed: res:", res);
+    alert("Google login failed.");
   };
 
   // Display Google login button

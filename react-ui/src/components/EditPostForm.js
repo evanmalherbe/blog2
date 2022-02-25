@@ -31,6 +31,7 @@ function EditPostForm(props) {
       props.authMsg === "Success! Token valid." &&
       props.showEditPost === true
     ) {
+      console.log("Edit post form page.");
       showEditPostForm = (
         <div className="editPostDiv">
           <h1>Edit Post</h1>
@@ -102,7 +103,7 @@ function EditPostForm(props) {
   // Return/ display page
   return (
     <div className="bodyDiv">
-      <LeftPanel />
+      <LeftPanel showEditPost={props.showEditPost} />
       {showEditPostForm}
       <RightPanel />
     </div>

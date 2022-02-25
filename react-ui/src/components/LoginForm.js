@@ -23,12 +23,17 @@ function LoginForm(props) {
   // Learned to redirect/Navigate with react router here:
   // https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
 
-  // If user has successfully logged in, display create new post page
-  if (props.authMessage === "Success! Token valid.") {
+  if (props.userToRegister === true) {
+    console.log("Props user to register is true");
+    showLoginPage = <Navigate to="/RegisterUser" />;
+
+    // If user has successfully logged in, display create new post page
+  } else if (props.authMessage === "Success! Token valid.") {
     showLoginPage = <Navigate to="/CreatePost" />;
 
     // If user not yet logged in, display login page/form
   } else {
+    console.log("Login form page");
     showLoginPage = (
       <div className="loginDiv">
         <h1>Log in</h1>
