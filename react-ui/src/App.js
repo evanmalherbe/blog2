@@ -517,26 +517,40 @@ class App extends React.Component {
   handleRegister() {
     // Runs if username and password field are not blank
     if (this.state.username !== null || this.state.password !== null) {
-      let match = false;
+      let matchUserAndPass = false;
+      let matchUsername = false;
       let users = [];
       let pwords = [];
 
       users = this.state.usersArray.split(",");
       pwords = this.state.pwordArray.split(",");
 
-      // Check to see if user already exists on database
+      // Check to see if user already exists on database (matching username AND password)
       for (let i = 0; i <= users.length - 1; i++) {
         if (
           users[i] === this.state.username &&
           pwords[i] === this.state.password
         ) {
-          match = true;
+          matchUserAndPass = true;
         }
       }
-      console.log("Matching user in database? " + match);
+
+      // Check to see if username already exists on database (matching username only)
+      for (let i = 0; i <= users.length - 1; i++) {
+        if (users[i] === this.state.username) {
+          matchUsername = true;
+        }
+      }
+
+      // Create console log msg to tell about matching username or username and password
+      if (matchUserAndPass === true) {
+        console.log("Matching username and password in database.");
+      } else if (matchUsername === true) {
+        console.log("Matching username in database.");
+      }
 
       // If user does not yet exist on db, register them.
-      if (match === false) {
+      if (matchUsername === false) {
         this.setState(
           {
             isLoaded: false,
@@ -549,7 +563,10 @@ class App extends React.Component {
         );
 
         // If user is already registered in db with Google, just log in
-      } else if (match === true && this.state.loggedInWithGoogle === true) {
+      } else if (
+        matchUserAndPass === true &&
+        this.state.loggedInWithGoogle === true
+      ) {
         this.setState(
           {
             isLoaded: false,
@@ -562,7 +579,10 @@ class App extends React.Component {
         );
 
         // If user is already registered in db with Facebook, just log in
-      } else if (match === true && this.state.loggedInWithFacebook === true) {
+      } else if (
+        matchUserAndPass === true &&
+        this.state.loggedInWithFacebook === true
+      ) {
         this.setState(
           {
             isLoaded: false,
@@ -575,18 +595,20 @@ class App extends React.Component {
         );
 
         // if username already exists, create alert message
-      } else {
+      } else if (matchUsername === true) {
         this.setState(
           {
             isLoaded: false,
             userToRegister: false,
             loggedIn: false,
             authMessage: null,
+            loggedInWithFacebook: false,
+            loggedInWithGoogle: false,
           },
           () => {
-            console.log("User already exists.");
+            console.log("Username already exists. Not logging in.");
             alert(
-              "A user with that name already exists. Please choose a different username and then click 'Register' again."
+              "A user with that username already exists. Please choose a different username and then try again."
             );
             this.reloadPage();
           }
