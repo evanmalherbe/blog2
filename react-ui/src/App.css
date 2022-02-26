@@ -173,7 +173,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
   flex: 2;
   flex-direction: column;
   padding: 0rem 1rem;
-  margin: 0rem 1rem 0rem 1rem;
+  margin: 0rem 1rem 2rem 1rem;
 }
 
 .adminArea {
@@ -232,6 +232,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
   margin-bottom: 0.5rem;
   padding: 0rem 1rem 0.3rem 1rem;
   background-color: white;
+  box-shadow: 5px 5px 10px #dddddd;
 }
 
 .author {
@@ -241,6 +242,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 }
 
 .title {
+  color: #008037;
   font-weight: bold;
   font-size: 1.2rem;
 }

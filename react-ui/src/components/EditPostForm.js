@@ -52,7 +52,7 @@ function EditPostForm(props) {
             <FormGroup className="mb-3">
               <Form.Control
                 as="textarea"
-                rows={5}
+                rows={10}
                 name="post"
                 defaultValue={props.post.replace("///", "")}
                 onChange={props.handlePost}

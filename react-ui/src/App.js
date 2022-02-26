@@ -95,6 +95,7 @@ class App extends React.Component {
     this.reloadForDeletePost = this.reloadForDeletePost.bind(this);
     this.reloadForUpdatePost = this.reloadForUpdatePost.bind(this);
     this.reloadForRegisterUser = this.reloadForRegisterUser.bind(this);
+    this.handleClearPost = this.handleClearPost.bind(this);
   }
 
   // This function is called by RegisterUSer component to reload page after adding user to db
@@ -322,6 +323,20 @@ class App extends React.Component {
   }
 
   // ----------------------------------------------------------- //
+
+  // Clear create post form fields
+  handleClearPost() {
+    this.setState(
+      {
+        postTitle: null,
+        postBody: null,
+      },
+      () => {
+        console.log("Form fields cleared.");
+        document.forms["createPostForm"].reset();
+      }
+    );
+  }
 
   // Saves new blog post to database, along with date created timestamp
   handleSavePost() {
@@ -875,6 +890,7 @@ class App extends React.Component {
                     createPostActive={true}
                     postToAdd={postToAdd}
                     userToRegister={userToRegister}
+                    handleClearPost={this.handleClearPost}
                   />
                 }
               />

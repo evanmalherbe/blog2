@@ -66,6 +66,16 @@ function CreatePostForm(props) {
                 Save Post
               </Button>
             </Col>
+            <Col sm={3}>
+              <Button
+                className="buttons"
+                variant="danger"
+                type="button"
+                onClick={props.handleClearPost}
+              >
+                Clear
+              </Button>
+            </Col>
           </Row>
         </Form>
       </div>
