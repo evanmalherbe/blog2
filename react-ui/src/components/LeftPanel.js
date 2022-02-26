@@ -29,7 +29,7 @@ function LeftPanel(props) {
     displayUsers.push(
       <Button
         type="button"
-        variant="outline-primary"
+        variant="outline-success"
         className="mb-1"
         onClick={() => props.updateSelectedUser(null)}
         key={0}
@@ -48,7 +48,7 @@ function LeftPanel(props) {
       displayUsers.push(
         <Button
           type="button"
-          variant="outline-primary"
+          variant="outline-success"
           className="mb-1"
           // When user clicks, it updates the selected user name variable
           onClick={() => props.updateSelectedUser(usersArray[i])}

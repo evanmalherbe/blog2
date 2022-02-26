@@ -39,7 +39,7 @@ export function SortAdminPage(
           <div className="postButtons">
             <Button
               className="buttons"
-              variant="primary"
+              variant="success"
               type="button"
               onClick={() =>
                 toggleEditVar(
@@ -54,7 +54,7 @@ export function SortAdminPage(
             </Button>
             <Button
               className="buttons"
-              variant="primary"
+              variant="danger"
               type="button"
               onClick={() => handleDeletePost(idsArray[i])}
             >
@@ -89,7 +89,7 @@ export function SortAdminPage(
           <div className="postButtons">
             <Button
               className="buttons"
-              variant="primary"
+              variant="success"
               type="button"
               onClick={() =>
                 toggleEditVar(
@@ -104,7 +104,7 @@ export function SortAdminPage(
             </Button>
             <Button
               className="buttons"
-              variant="primary"
+              variant="danger"
               type="button"
               onClick={() => handleDeletePost(idsArray[i])}
             >

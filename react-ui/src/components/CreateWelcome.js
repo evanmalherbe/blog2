@@ -25,7 +25,7 @@ function CreateWelcome(loggedIn, adminStatus, currentUser, handleLogout) {
           <p>Welcome, {nameCapitalised} (admin)!</p>
           <Button
             className="logoutButton"
-            variant="primary"
+            variant="outline-danger"
             type="button"
             onClick={handleLogout}
           >
@@ -39,7 +39,7 @@ function CreateWelcome(loggedIn, adminStatus, currentUser, handleLogout) {
           <p>Welcome, {nameCapitalised}!</p>
           <Button
             className="logoutButton"
-            variant="primary"
+            variant="outline-danger"
             type="button"
             onClick={handleLogout}
           >

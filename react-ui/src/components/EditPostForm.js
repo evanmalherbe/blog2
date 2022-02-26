@@ -62,7 +62,7 @@ function EditPostForm(props) {
               <Col sm={3}>
                 <Button
                   className="buttons"
-                  variant="primary"
+                  variant="success"
                   type="button"
                   onClick={() => props.handleEditPost(props.id)}
                 >
@@ -72,7 +72,7 @@ function EditPostForm(props) {
               <Col>
                 <Button
                   className="buttons"
-                  variant="primary"
+                  variant="danger"
                   type="button"
                   onClick={() => props.handleCancelEdit()}
                 >

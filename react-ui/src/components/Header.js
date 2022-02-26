@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import logo image
-import logo from "../blogLogo.png";
+import logo from "../deepLogo.png";
 
 // Import component
 import Menu from "./Menu";
@@ -15,7 +15,7 @@ function Header(props) {
     <header className="header">
       <div className="logoAndHeading">
         <img src={logo} className="logo" alt="logo" />
-        <h1>Hyperion Blog</h1>
+        {/* <h1>Hyperion Blog</h1> */}
       </div>
 
       {/* Displays menu links */}

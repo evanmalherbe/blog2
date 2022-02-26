@@ -38,7 +38,7 @@ export function SortModifyPosts(
           <div className="postButtons">
             <Button
               className="buttons"
-              variant="primary"
+              variant="success"
               type="button"
               onClick={() =>
                 toggleEditVar(
@@ -53,7 +53,7 @@ export function SortModifyPosts(
             </Button>
             <Button
               className="buttons"
-              variant="primary"
+              variant="danger"
               type="button"
               onClick={() => handleDeletePost(idsArray[i])}
             >

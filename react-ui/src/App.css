@@ -44,7 +44,7 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 /* Header styles */
 .logo {
-  height: 3rem;
+  height: 5rem;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -52,14 +52,14 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 .header {
   display: flex;
   flex-direction: row;
-  background-color: #2a6877;
+  background-color: black;
   color: #f0f1f3;
-  height: 4rem;
+  height: 6rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   /* border-bottom: 1px solid #dedede; */
-  padding-top: 0.5rem;
+  padding-top: 0rem;
   box-shadow: 0px 0px 5px grey;
 }
 
@@ -87,12 +87,15 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 
 .menuDiv a {
   text-decoration: none;
-  color: #f0f1f3;
+  color: #01a748;
+  font-weight: bold;
+  /* #f0f1f3; */
 }
 
 .menuDiv a:hover {
   text-decoration: underline;
-  color: #f0f1f3;
+  color: #01a748;
+  font-weight: bold;
 }
 
 /* End of styling for menu ------------------------------*/
@@ -286,8 +289,10 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
   justify-content: center;
   height: 3rem;
   width: 100%;
-  color: #f0f1f3;
-  background-color: #2a6877;
+  color: white;
+  /* color: #f0f1f3; */
+  background-color: black;
+  /* #2a6877; */
   box-shadow: 0px 0px 5px grey;
   position: absolute;
   bottom: 0;

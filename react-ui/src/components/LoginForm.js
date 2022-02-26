@@ -62,7 +62,7 @@ function LoginForm(props) {
             <Col>
               <Button
                 className="buttons"
-                variant="primary"
+                variant="success"
                 type="button"
                 onClick={() => props.handleLogin()}
               >
