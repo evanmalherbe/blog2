@@ -70,6 +70,7 @@ class App extends React.Component {
       postToUpdate: false,
       loggedInWithGoogle: false,
       loggedInWithFacebook: false,
+      breadcrumbs: "Home",
     };
 
     // Binding to make "this" work correctly
@@ -96,6 +97,7 @@ class App extends React.Component {
     this.reloadForUpdatePost = this.reloadForUpdatePost.bind(this);
     this.reloadForRegisterUser = this.reloadForRegisterUser.bind(this);
     this.handleClearPost = this.handleClearPost.bind(this);
+    this.changeBreadcrumb = this.changeBreadcrumb.bind(this);
   }
 
   // This function is called by RegisterUSer component to reload page after adding user to db
@@ -732,6 +734,13 @@ class App extends React.Component {
       );
   }
 
+  changeBreadcrumb(currentPage) {
+    let currentBreadcrumb = <div className="breadcrumbs">{currentPage}</div>;
+    this.setState({
+      breadcrumbs: currentBreadcrumb,
+    });
+  }
+
   // Runs when page is first loaded. Retrieves logins from db
   componentDidMount() {
     if (this.state.isLoaded === false) {
@@ -779,6 +788,8 @@ class App extends React.Component {
       password,
       loggedInWithGoogle,
       loggedInWithFacebook,
+      count,
+      breadcrumbs,
     } = this.state;
 
     let loginStatusMsg;
@@ -810,6 +821,7 @@ class App extends React.Component {
 
             <Header loggedIn={loggedIn} adminStatus={adminStatus} />
             <div className="underHeader">
+              {breadcrumbs}
               {/* Display login status message. Contents differ according to whether user is logged in or 
               not */}
               {loginStatusMsg}
@@ -830,6 +842,8 @@ class App extends React.Component {
                     usersArray={usersArray}
                     dateCreatedArray={dateCreatedArray}
                     dateModifiedArray={dateModifiedArray}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -845,6 +859,8 @@ class App extends React.Component {
                     handlePassword={this.handlePassword}
                     handleGoogleLogin={this.handleGoogleLogin}
                     handleFacebookLogin={this.handleFacebookLogin}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -860,6 +876,8 @@ class App extends React.Component {
                     handleFacebookRegister={this.handleFacebookRegister}
                     justRegistered={justRegistered}
                     userToRegister={userToRegister}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -891,6 +909,8 @@ class App extends React.Component {
                     postToAdd={postToAdd}
                     userToRegister={userToRegister}
                     handleClearPost={this.handleClearPost}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -941,6 +961,8 @@ class App extends React.Component {
                     toggleEditVar={this.toggleEditVar}
                     showEditPost={showEditPost}
                     postToDelete={postToDelete}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -962,6 +984,8 @@ class App extends React.Component {
                     showEditPost={showEditPost}
                     editCanceled={editCanceled}
                     postToUpdate={postToUpdate}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />
@@ -1004,6 +1028,8 @@ class App extends React.Component {
                     showEditPost={showEditPost}
                     postToDelete={postToDelete}
                     postToUpdate={postToUpdate}
+                    changeBreadcrumb={this.changeBreadcrumb}
+                    count={count}
                   />
                 }
               />

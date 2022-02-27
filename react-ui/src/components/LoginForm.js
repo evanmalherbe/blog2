@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 import { Navigate } from "react-router-dom";
 
@@ -34,9 +35,14 @@ function LoginForm(props) {
     // If user not yet logged in, display login page/form
   } else {
     console.log("Login form page");
+
+    useEffect(() => {
+      props.changeBreadcrumb("Home / Login");
+    }, []);
+
     showLoginPage = (
       <div className="loginDiv">
-        <h1>Log in</h1>
+        <h2>Login here</h2>
         {/* Learned how to turn autocomplete off here: 
       https://reactgo.com/react-turn-off-autocomplete/ */}
 
@@ -59,7 +65,7 @@ function LoginForm(props) {
             />{" "}
           </FormGroup>
           <Row className="mb-3">
-            <Col>
+            <Col className="d-grid gap-2">
               <Button
                 className="buttons"
                 variant="success"
@@ -69,6 +75,10 @@ function LoginForm(props) {
                 Login
               </Button>
             </Col>{" "}
+          </Row>
+          <Row>
+            {" "}
+            <Form.Label>OR</Form.Label>
           </Row>
           <Row className="mb-3">
             <Col>

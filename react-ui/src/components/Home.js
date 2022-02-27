@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 // Import custom stylesheet
 import "../App.css";
@@ -11,6 +12,10 @@ import LeftPanel from "./LeftPanel";
 // Function to display home page with posts from all blog authors. What centre panel displays is
 // determined by who is logged in and which menu link user has clicked
 function Home(props) {
+  useEffect(() => {
+    props.changeBreadcrumb("Home");
+  }, []);
+
   return (
     <div className="bodyDiv">
       <LeftPanel

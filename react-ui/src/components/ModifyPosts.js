@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 // Import components
@@ -73,6 +73,11 @@ function ModifyPosts(props) {
     // if user logged in, show page to modify posts (edit or delete)
     if (props.authMessage === "Success! Token valid.") {
       console.log("Modify posts page.");
+
+      useEffect(() => {
+        props.changeBreadcrumb("Home / Modify Posts");
+      }, []);
+
       showModifyArea = (
         <div className="adminArea" id="top">
           <h2>Modify Posts</h2>

@@ -45,6 +45,7 @@ function CentrePanel(props) {
     <div className="centerPanel" id="top">
       <h2>{whosePosts}</h2>
       {displayPosts}
+      <br />
       <a href="#top">Back to top</a>
     </div>
   );

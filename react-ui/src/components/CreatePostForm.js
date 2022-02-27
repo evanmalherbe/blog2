@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 // Import React Bootstrap components
@@ -32,6 +32,11 @@ function CreatePostForm(props) {
     props.postToAdd === false
   ) {
     console.log("Create post form page");
+
+    useEffect(() => {
+      props.changeBreadcrumb("Home / Create Post");
+    }, []);
+
     showCreatePost = (
       <div className="createPostDiv">
         <h1>Create New Post</h1>

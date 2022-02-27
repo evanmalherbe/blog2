@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 import { Navigate } from "react-router-dom";
 
@@ -27,6 +28,11 @@ function RegisterForm(props) {
     // If user has not yet registered, display register page/form
   } else {
     console.log("Register form page.");
+
+    useEffect(() => {
+      props.changeBreadcrumb("Home / Register");
+    }, []);
+
     showButton = (
       <div className="registerDiv">
         <h1>Register</h1>

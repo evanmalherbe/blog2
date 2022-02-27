@@ -107,16 +107,11 @@ https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
 }
 
 /* Breadcrumbs just under header */
-.breadCrumbs {
+.breadcrumbs {
   margin-left: 1rem;
   margin-top: 0.5rem;
 }
 
-.breadCrumbs p {
-  margin: 0;
-  padding: 0;
-  display: inline;
-}
 /* End of breadcrumbs -------------------------------- */
 
 /* Div for login status message */

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 // Import React Bootstrap components
@@ -32,6 +32,11 @@ function EditPostForm(props) {
       props.showEditPost === true
     ) {
       console.log("Edit post form page.");
+
+      useEffect(() => {
+        props.changeBreadcrumb("Home / Edit Post");
+      }, []);
+
       showEditPostForm = (
         <div className="editPostDiv">
           <h1>Edit Post</h1>
