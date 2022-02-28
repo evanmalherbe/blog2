@@ -33,8 +33,14 @@ function EditPostForm(props) {
     ) {
       console.log("Edit post form page.");
 
+      let crumb = (
+        <div>
+          <a href="/">Home</a> / Edit Post
+        </div>
+      );
+
       useEffect(() => {
-        props.changeBreadcrumb("Home / Edit Post");
+        props.changeBreadcrumb(crumb);
       }, []);
 
       showEditPostForm = (

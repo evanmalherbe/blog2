@@ -29,8 +29,14 @@ function RegisterForm(props) {
   } else {
     console.log("Register form page.");
 
+    let crumb = (
+      <div>
+        <a href="/">Home</a> / Register
+      </div>
+    );
+
     useEffect(() => {
-      props.changeBreadcrumb("Home / Register");
+      props.changeBreadcrumb(crumb);
     }, []);
 
     showButton = (

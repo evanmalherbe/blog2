@@ -33,8 +33,14 @@ function CreatePostForm(props) {
   ) {
     console.log("Create post form page");
 
+    let crumb = (
+      <div>
+        <a href="/">Home</a> / Create Post
+      </div>
+    );
+
     useEffect(() => {
-      props.changeBreadcrumb("Home / Create Post");
+      props.changeBreadcrumb(crumb);
     }, []);
 
     showCreatePost = (

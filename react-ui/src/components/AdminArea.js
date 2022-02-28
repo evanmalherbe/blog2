@@ -80,8 +80,14 @@ function AdminArea(props) {
     if (authMessage === "Success! Token valid." && adminStatus === true) {
       console.log("Admin area page.");
 
+      let crumb = (
+        <div>
+          <a href="/">Home</a> / Admin Area
+        </div>
+      );
+
       useEffect(() => {
-        props.changeBreadcrumb("Home / Admin Area");
+        props.changeBreadcrumb(crumb);
       }, []);
 
       showAdminArea = (

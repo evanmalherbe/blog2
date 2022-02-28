@@ -74,8 +74,14 @@ function ModifyPosts(props) {
     if (props.authMessage === "Success! Token valid.") {
       console.log("Modify posts page.");
 
+      let crumb = (
+        <div>
+          <a href="/">Home</a> / Modify Posts
+        </div>
+      );
+
       useEffect(() => {
-        props.changeBreadcrumb("Home / Modify Posts");
+        props.changeBreadcrumb(crumb);
       }, []);
 
       showModifyArea = (

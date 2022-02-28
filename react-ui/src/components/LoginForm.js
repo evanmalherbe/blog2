@@ -35,9 +35,14 @@ function LoginForm(props) {
     // If user not yet logged in, display login page/form
   } else {
     console.log("Login form page");
+    let crumb = (
+      <div>
+        <a href="/">Home</a> / Login
+      </div>
+    );
 
     useEffect(() => {
-      props.changeBreadcrumb("Home / Login");
+      props.changeBreadcrumb(crumb);
     }, []);
 
     showLoginPage = (
